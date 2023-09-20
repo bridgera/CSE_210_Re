@@ -38,7 +38,7 @@ class Program
         Console.WriteLine($"The average is: {total / numberList.Count}");
         Console.WriteLine($"The largest number is {largestNum}");
         Console.WriteLine($"The smallest positive number is {smallestNum}");
-        Console.WriteLine("Here is the list in order");
+        Console.WriteLine("Here is your list in order");
 
         foreach (float num in numberList)
         {
