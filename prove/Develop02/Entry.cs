@@ -4,34 +4,34 @@ namespace Develop02
 {
     public class Entry
     {
-        public string Prompt;
-        public string Response;
-        public string Date; 
+        public string _prompt;
+        public string _response;
+        public string _date; 
         
         public void SetPrompt(string prompt)
         {
-            Prompt = prompt;
+            _prompt = prompt;
         }
         public void SetResponse(string response)
         {
-            Response = response;
+            _response = response;
         }
         public void SetDate(string date = null)
         {
-            if (date == null)
+            if (_date == null)
             {
-                Date = DateTime.Now.ToString("MM/dd/yyyy");
+                _date = DateTime.Now.ToString("MM/dd/yyyy");
             }
             else
             {
-                Date = date;
+                _date = date;
             }
         }
 
         public void DisplayEntry()
         {
-            Console.WriteLine($"Date: {Date} - Prompt: {Prompt}");
-            Console.WriteLine(Response);
+            Console.WriteLine($"_date: {_date} - _prompt: {_prompt}");
+            Console.WriteLine(_response);
             Console.WriteLine("-----------------------------");
         }
     }

@@ -6,18 +6,18 @@ namespace Develop02
 {
     public class FileHandler
     {
-        private char slicey = '|';
-        private string directoryPath = "JournalFiles"; 
+        private char _slicey = '|';
+        private string _directoryPath = "JournalFiles"; 
 
         public void SaveJournal(List<Entry> entries, string filename)
         {
-            string fullPath = $"{directoryPath}\\{filename}";
+            string fullPath = $"{_directoryPath}\\{filename}";
 
             using (StreamWriter outputFile = new StreamWriter(fullPath))
             {
                 foreach (Entry entry in entries)
                 {
-                    string line = $"{entry.Prompt}{slicey}{entry.Response}{slicey}{entry.Date}";
+                    string line = $"{entry._prompt}{_slicey}{entry._response}{_slicey}{entry._date}";
                     outputFile.WriteLine(line);
                 }
             }
@@ -27,7 +27,7 @@ namespace Develop02
         public List<Entry> LoadJournal(string filename)
         {
             
-            string fullPath = $"{directoryPath}\\{filename}";
+            string fullPath = $"{_directoryPath}\\{filename}";
 
             List<Entry> loadedEntries = new List<Entry>();
             string[] lines = System.IO.File.ReadAllLines(fullPath);
