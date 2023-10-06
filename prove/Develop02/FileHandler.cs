@@ -6,44 +6,48 @@ namespace Develop02
 {
     public class FileHandler
     {
-        private char Separator = '|';
+        private char slicey = '|';
         private string directoryPath = "JournalFiles"; 
 
-        public void SaveJournal(List<Entry> entries)
+        public void SaveJournal(List<Entry> entries, string filename)
         {
-            Console.WriteLine("Enter filename:");
-            string filename = Console.ReadLine();
-            string fullPath = Path.Combine(directoryPath, filename);
+            string fullPath = $"{directoryPath}\\{filename}";
 
-            List<string> lines = new List<string>();
-            foreach (Entry entry in entries)
+            using (StreamWriter outputFile = new StreamWriter(fullPath))
             {
-                lines.Add($"{entry.Prompt}{Separator}{entry.Response}{Separator}{entry.Date}");
+                foreach (Entry entry in entries)
+                {
+                    string line = $"{entry.Prompt}{slicey}{entry.Response}{slicey}{entry.Date}";
+                    outputFile.WriteLine(line);
+                }
             }
-            File.WriteAllLines(fullPath, lines);
         }
 
-        public List<Entry> LoadJournal()
+
+        public List<Entry> LoadJournal(string filename)
         {
-            Console.WriteLine("Enter filename:");
-            string filename = Console.ReadLine();
-            string fullPath = Path.Combine(directoryPath, filename);
+            
+            string fullPath = $"{directoryPath}\\{filename}";
 
             List<Entry> loadedEntries = new List<Entry>();
-            string[] lines = File.ReadAllLines(fullPath);
+            string[] lines = System.IO.File.ReadAllLines(fullPath);
             
             foreach (string line in lines)
             {
-                string[] parts = line.Split(Separator);
-                if (parts.Length == 3)
-                {
-                    loadedEntries.Add(new Entry
-                    {
-                        Prompt = parts[0],
-                        Response = parts[1],
-                        Date = parts[2]
-                    });
-                }
+
+                string[] parts = line.Split("|");
+
+                string prompt = parts[0];
+                string response = parts[1];
+                string date = parts[2];
+
+                Entry freshEntry = new Entry();
+
+                freshEntry.SetPrompt(prompt);
+                freshEntry.SetResponse(response);
+                freshEntry.SetDate(date);
+
+                loadedEntries.Add(freshEntry);
             }
 
             return loadedEntries;

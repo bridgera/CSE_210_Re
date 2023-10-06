@@ -4,15 +4,16 @@ namespace Develop02
 {
     public class Journal
     {
-        public List<Entry> Entries { get; set; } = new List<Entry>();
-        public string JournalName { get; set; }
+        public List<Entry> Entries = new List<Entry>();
+        public string JournalName;
 
         public void AddEntry(Entry entry)
         {
-            if (!Entries.Contains(entry))
-            {
-                Entries.Add(entry);
-            }
+    
+            Entries.Add(entry);
+        
         }
+
+        
     }
 }

@@ -13,10 +13,10 @@ namespace Develop02
             prompts = new List<string>
             {
                 "What was the best part of your day?",
-                "Describe a recent dream you had.",
+                "Describe the dream you had last night.",
                 "What's a goal you want to achieve this year?",
                 "Write about a memory.",
-                "How do you feel right now?",
+                "How do you feel?",
             };
 
             random = new Random();
