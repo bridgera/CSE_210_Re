@@ -5,10 +5,7 @@ namespace Develop02
     class Program
     {
 
-
-        // I exceeded the requirements by adding a system to check if the file they attempt to load is a valid file
-
-
+    // I exceeded the requirements by adding a system to check if the file they attempt to load is a valid file
 
         static void Main(string[] args)
         {
