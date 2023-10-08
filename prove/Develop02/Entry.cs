@@ -30,7 +30,7 @@ namespace Develop02
 
         public void DisplayEntry()
         {
-            Console.WriteLine($"_date: {_date} - _prompt: {_prompt}");
+            Console.WriteLine($"date: {_date} - prompt: {_prompt}");
             Console.WriteLine(_response);
             Console.WriteLine("-----------------------------");
         }
