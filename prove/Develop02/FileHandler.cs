@@ -27,43 +27,34 @@ namespace Develop02
 
         public List<Entry> LoadJournal(string filename)
         {
-            bool fileExists = false;
-
             List<Entry> loadedEntries = new List<Entry>();
 
-            while(fileExists != true)
+            string fullPath = $"{_directoryPath}\\{filename}";
+
+            while (!File.Exists(fullPath))
             {
-                string fullPath = $"{_directoryPath}\\{filename}";
+                Console.WriteLine("Please enter a valid file name");
+                filename = Console.ReadLine();
+                fullPath = $"{_directoryPath}\\{filename}";
+            }
 
-                if (File.Exists(fullPath))
-                {
-                    fileExists = true;
+            string[] lines = System.IO.File.ReadAllLines(fullPath);
 
-                    string[] lines = System.IO.File.ReadAllLines(fullPath);
-                    
-                    foreach (string line in lines)
-                    {
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split("|");
 
-                        string[] parts = line.Split("|");
+                string prompt = parts[0];
+                string response = parts[1];
+                string date = parts[2];
 
-                        string prompt = parts[0];
-                        string response = parts[1];
-                        string date = parts[2];
+                Entry freshEntry = new Entry();
 
-                        Entry freshEntry = new Entry();
+                freshEntry.SetPrompt(prompt);
+                freshEntry.SetResponse(response);
+                freshEntry.SetDate(date);
 
-                        freshEntry.SetPrompt(prompt);
-                        freshEntry.SetResponse(response);
-                        freshEntry.SetDate(date);
-
-                        loadedEntries.Add(freshEntry);
-                    }
-
-                }
-                else
-                {
-                    Console.WriteLine("Please enter a valid file name");
-                }
+                loadedEntries.Add(freshEntry);
             }
 
             return loadedEntries;
