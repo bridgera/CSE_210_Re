@@ -1,43 +1,77 @@
-
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 class Scripture
 {
-    public Reference ScriptureReference { get; private set; }
-    public List<Word> Words { get; private set; }
+    public Reference ScriptureReference;
+    public List<string> Words;
+    public List<bool> WordsHidden;
 
-    public Scripture(Reference scriptureReference, string text)
+
+    public void SetScripture(Reference scriptureReference, string text)
     {
         ScriptureReference = scriptureReference;
-        Words = text.Split(' ').Select(word => new Word(word)).ToList();
+        Words = new List<string>(text.Split(' '));
+        WordsHidden = new List<bool>();
+
+        for (int i = 0; i < Words.Count; i++)
+        {
+            WordsHidden.Add(false);
+        }
     }
 
     public void Display()
     {
         Console.WriteLine(ScriptureReference.ToString());
-        Console.WriteLine(string.Join(" ", Words));
+        for (int i = 0; i < Words.Count; i++)
+        {
+            if (WordsHidden[i])
+            {
+                Console.Write("___ "); 
+            }
+            else
+            {
+                Console.Write(Words[i] + " ");
+            }
+        }
+        Console.WriteLine();
     }
 
     public void HideRandomWords(int count = 1)
     {
         Random rng = new Random();
 
-        // Select words that are not hidden yet
-        var wordsToHide = Words.Where(word => !word.IsHidden).ToList();
 
-        // Randomly hide words
-        for (int i = 0; i < count && wordsToHide.Count > 0; i++)
+        int hideableWordsCount = 0;
+        for (int i = 0; i < WordsHidden.Count; i++)
         {
-            int index = rng.Next(wordsToHide.Count);
-            wordsToHide[index].IsHidden = true;
-            wordsToHide.RemoveAt(index);
+            if (!WordsHidden[i])
+            {
+                hideableWordsCount++;
+            }
+        }
+
+        while (count > 0 && hideableWordsCount > 0)
+        {
+            int index = rng.Next(Words.Count);
+            if (!WordsHidden[index])
+            {
+                WordsHidden[index] = true;
+                count--;
+                hideableWordsCount--;
+            }
         }
     }
 
     public bool AreAllWordsHidden()
     {
-        return Words.All(word => word.IsHidden);
+        for (int i = 0; i < WordsHidden.Count; i++)
+        {
+            if (!WordsHidden[i])
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

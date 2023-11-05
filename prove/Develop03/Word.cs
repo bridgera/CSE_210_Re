@@ -1,19 +1,25 @@
-
 using System;
 
 class Word
 {
-    public string Content { get; private set; }
-    public bool IsHidden { get; set; }
+    public string Content;
+    public bool IsHidden;
 
-    public Word(string content)
+    public void SetContent(string content)
     {
         Content = content;
-        IsHidden = false;
+        IsHidden = false; 
     }
 
     public override string ToString()
     {
-        return IsHidden ? "_____" : Content;
+        if (IsHidden)
+        {
+            return "_____";
+        }
+        else
+        {
+            return Content;
+        }
     }
 }
