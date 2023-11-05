@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 class Scripture
 {
-    public Reference ScriptureReference;
-    public List<string> Words;
-    public List<bool> WordsHidden;
+    private Reference ScriptureReference;
+    private List<string> Words;
+    private List<bool> WordsHidden;
 
 
     public void SetScripture(Reference scriptureReference, string text)
