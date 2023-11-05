@@ -2,33 +2,25 @@ using System;
 
 class Reference
 {
-    private string BookName;
-    private int Chapter;
-    private int Verse;
-    private int EndVerse; 
+    private string _bookName;
+    private int _chapter;
+    private int _verse;
+    private int _endVerse; 
 
 
-    public void SetReference(string bookName, int chapter, int verse)
+    public void SetReference(string bookName, int chapter, int verse, int endVerse = 0)
     {
-        BookName = bookName;
-        Chapter = chapter;
-        Verse = verse;
-        EndVerse = 0;
-    }
-
-    public void SetRange(string bookName, int chapter, int verse, int endVerse)
-    {
-        BookName = bookName;
-        Chapter = chapter;
-        Verse = verse;
-        EndVerse = endVerse;
+        _bookName = bookName;
+        _chapter = chapter;
+        _verse = verse;
+        _endVerse = endVerse;
     }
 
     public override string ToString()
     {
-        if (EndVerse != 0)
-            return BookName + " " + Chapter.ToString() + ":" + Verse.ToString() + "-" + EndVerse.ToString();
+        if (_endVerse != 0)
+            return _bookName + " " + _chapter.ToString() + ":" + _verse.ToString() + "-" + _endVerse.ToString();
         else
-            return BookName + " " + Chapter.ToString() + ":" + Verse.ToString();
+            return _bookName + " " + _chapter.ToString() + ":" + _verse.ToString();
     }
 }
