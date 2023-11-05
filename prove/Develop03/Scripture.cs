@@ -3,35 +3,34 @@ using System.Collections.Generic;
 
 class Scripture
 {
-    private Reference ScriptureReference;
-    private List<string> Words;
-    private List<bool> WordsHidden;
-
+    private Reference _scriptureReference;
+    private List<string> _words;
+    private List<bool> _wordsHidden;
 
     public void SetScripture(Reference scriptureReference, string text)
     {
-        ScriptureReference = scriptureReference;
-        Words = new List<string>(text.Split(' '));
-        WordsHidden = new List<bool>();
+        _scriptureReference = scriptureReference;
+        _words = new List<string>(text.Split(' '));
+        _wordsHidden = new List<bool>();
 
-        for (int i = 0; i < Words.Count; i++)
+        for (int i = 0; i < _words.Count; i++)
         {
-            WordsHidden.Add(false);
+            _wordsHidden.Add(false);
         }
     }
 
     public void Display()
     {
-        Console.WriteLine(ScriptureReference.ToString());
-        for (int i = 0; i < Words.Count; i++)
+        Console.WriteLine(_scriptureReference.ToString());
+        for (int i = 0; i < _words.Count; i++)
         {
-            if (WordsHidden[i])
+            if (_wordsHidden[i])
             {
                 Console.Write("___ "); 
             }
             else
             {
-                Console.Write(Words[i] + " ");
+                Console.Write(_words[i] + " ");
             }
         }
         Console.WriteLine();
@@ -41,11 +40,10 @@ class Scripture
     {
         Random rng = new Random();
 
-
         int hideableWordsCount = 0;
-        for (int i = 0; i < WordsHidden.Count; i++)
+        for (int i = 0; i < _wordsHidden.Count; i++)
         {
-            if (!WordsHidden[i])
+            if (!_wordsHidden[i])
             {
                 hideableWordsCount++;
             }
@@ -53,10 +51,10 @@ class Scripture
 
         while (count > 0 && hideableWordsCount > 0)
         {
-            int index = rng.Next(Words.Count);
-            if (!WordsHidden[index])
+            int index = rng.Next(_words.Count);
+            if (!_wordsHidden[index])
             {
-                WordsHidden[index] = true;
+                _wordsHidden[index] = true;
                 count--;
                 hideableWordsCount--;
             }
@@ -65,9 +63,9 @@ class Scripture
 
     public bool AreAllWordsHidden()
     {
-        for (int i = 0; i < WordsHidden.Count; i++)
+        for (int i = 0; i < _wordsHidden.Count; i++)
         {
-            if (!WordsHidden[i])
+            if (!_wordsHidden[i])
             {
                 return false;
             }
