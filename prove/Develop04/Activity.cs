@@ -9,10 +9,14 @@ public class Activity
 //Create anim instance
     protected Animation _animation = new Animation();
 
+//Running activity
     public void RunActivity()
     {
         StartMessage();
 
+        PreActivity();
+
+        //Timer loop
         DateTime startTime = DateTime.Now;
         DateTime futureTime = startTime.AddSeconds(_duration);
 
@@ -24,11 +28,18 @@ public class Activity
         EndMessage();
     }
 
-    protected void ActivityLogic()
+// To be overidden
+    protected virtual void PreActivity()
+    {
+
+    }
+    protected virtual void ActivityLogic()
     {
 
     }
 
+
+//Other Methods
     protected void SetDuration()
     {
         Console.Write($"Enter the duration for the {_name} in seconds: ");

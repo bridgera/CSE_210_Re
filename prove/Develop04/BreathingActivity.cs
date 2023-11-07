@@ -9,7 +9,7 @@ public class BreathingActivity : Activity
         _description = "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.";
     }
 
-    protected new void ActivityLogic()
+    protected override void ActivityLogic()
     {
          Console.Write("\nBreathe in...");
          _animation.CountdownAnim(4);
