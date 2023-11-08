@@ -2,7 +2,7 @@ using System;
 
 public class ReflectionActivity : Activity
 {
-    // Listssssss
+// Listssssss / attributes
     private List<string> _reflections = new List<string>
     {
         "Think of a time when you stood up for someone else.",
@@ -24,14 +24,14 @@ public class ReflectionActivity : Activity
         "How can you keep this experience in mind in the future?" 
     };
 
-    //Constructor
+//Constructor
     public ReflectionActivity()
     {
         _name = "The Reflection Activity";
         _description = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.";
     }
 
-
+// Activity time
     protected override void PreActivity()
     {
         string reflection = RandomPromptSelection(_reflections);
@@ -50,6 +50,7 @@ public class ReflectionActivity : Activity
     {
         string question = RandomPromptSelection(_questions);
 
+    // CHeck if list ran out of questions
         if (question != null)
         {
             Console.Write($"> {question}\n");

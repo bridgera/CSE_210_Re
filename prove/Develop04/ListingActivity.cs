@@ -2,6 +2,7 @@ using System;
 
 public class ListingActivity : Activity
 {
+//Attributes
     private int _count = 0;
     private List<string> _questions = new List<string>
      {
@@ -12,13 +13,14 @@ public class ListingActivity : Activity
         "Who are some of your personal heroes?"
     };
 
+// Constructor
     public ListingActivity()
     {
         _name = "The Listing Activity";
         _description = "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.";
     }
 
-
+// Actual activity
     protected override void PreActivity()
     {
         string question = RandomPromptSelection(_questions);
