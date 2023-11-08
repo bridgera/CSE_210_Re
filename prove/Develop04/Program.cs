@@ -26,11 +26,13 @@ class Program
             }
             else if (choice == "2")
             {
-
+                ReflectionActivity reflectionActivity = new ReflectionActivity();
+                reflectionActivity.RunActivity();
             }
             else if (choice == "3")
             {
-
+                ListingActivity listingActivity = new ListingActivity();
+                listingActivity.RunActivity();
             }
             else if (choice == "4")
             {

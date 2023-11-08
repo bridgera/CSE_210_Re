@@ -25,6 +25,8 @@ public class Activity
             ActivityLogic();
         }
 
+        PostActivity();
+
         EndMessage();
     }
 
@@ -34,6 +36,10 @@ public class Activity
 
     }
     protected virtual void ActivityLogic()
+    {
+
+    }
+    protected virtual void PostActivity()
     {
 
     }
@@ -62,6 +68,27 @@ public class Activity
         _animation.LoadingAnimation(2);
         Console.WriteLine($"\nYou have completed another {_duration} seconds of {_name}!");
         _animation.LoadingAnimation(5);
+    }
+
+
+// RandomPromptSelection
+    protected string RandomPromptSelection(List<string> prompts)
+    {
+        if (prompts.Count > 0)
+        {
+            Random random = new Random();
+            int prompt = random.Next(0, prompts.Count);
+            string randomPrompt = prompts[prompt];
+            prompts.RemoveAt(prompt); 
+
+            return randomPrompt;
+        }
+        else
+        {
+            return null;
+        }
+        
+               
     }
 
 }
