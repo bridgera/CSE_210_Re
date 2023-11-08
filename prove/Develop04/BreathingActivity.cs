@@ -11,11 +11,13 @@ public class BreathingActivity : Activity
 
     protected override void ActivityLogic()
     {
-         Console.Write("\nBreathe in...");
-         _animation.CountdownAnim(4);
+         Console.Write("\nBreathe in...\n");
+         _animation.BreathingAnimation(4,"in");
 
-         Console.Write("\nNow breathe out...");
-         _animation.CountdownAnim(6);  
+         Console.Write("\nNow breathe out...\n");
+         _animation.BreathingAnimation(4,"out");
+
+         Console.Clear();  
     }
 
 }
