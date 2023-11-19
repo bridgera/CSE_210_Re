@@ -7,6 +7,11 @@ public class EternalGoal : BaseGoal
         _goalType = "Eternal";
 
     }
+    public EternalGoal (string goalType, bool isCompleted, string goalTitle, string description, int pointValue)
+    : base(goalType, isCompleted, goalTitle, description, pointValue)
+    {
+
+    }
 
     public override void CompleteGoal()
     {

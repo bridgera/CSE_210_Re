@@ -10,9 +10,20 @@ public class BaseGoal
     protected bool _isCompleted;
     protected string _checkIcon = "[ ]";
 
+    //New goal constructor
     public BaseGoal (User user)
     {
         _user = user;
+    }
+
+    //Loading goal constructor
+    public BaseGoal (string goalType, bool isCompleted, string goalTitle, string description, int pointValue)
+    {
+        _goalType = goalType;
+        _isCompleted = isCompleted;
+        _goalTitle = goalTitle;
+        _description = description;
+        _pointValue = pointValue;
     }
 
 
@@ -36,7 +47,7 @@ public class BaseGoal
 
         string specificParam = AddGoalSpecificParameters();
 
-        string classString = $"{_goalType}{_goalTitle}|{_pointValue}|{_description}|{_isCompleted}|{specificParam}";
+        string classString = $"{_goalType}|{_isCompleted}|{_goalTitle}|{_description}|{_pointValue}|{specificParam}";
 
         _user.AddToList(classString);
 

@@ -12,6 +12,13 @@ public class ChecklistGoal : BaseGoal
 
     }
 
+    public ChecklistGoal (string goalType, bool isCompleted, string goalTitle, string description, int pointValue)
+    : base(goalType, isCompleted, goalTitle, description, pointValue)
+    {
+
+    }
+
+
     public override void CompleteGoal()
     {
         if (_timesCompleted == _timesNeeded)

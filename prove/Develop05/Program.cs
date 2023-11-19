@@ -1,13 +1,20 @@
 using System;
 
+//I really struggled on this one but tried to exceed requirements by having all data attached to users which I think ended up ruining to structure of my program. Will gladly take any feedback and help.
 class Program
 {
     static void Main(string[] args)
     {
-        User user = new User("TestUser");
+        //Initializing
+        Console.Clear();
+        Console.Write("Please enter user >>");
+        string username = Console.ReadLine();
+        User user = new User(username);
+        user.LoadFiles(false);
 
         string choice = "";
 
+        //Menu
         while(choice != "4")
         {
             Console.Clear();
@@ -58,7 +65,7 @@ class Program
             }
             else if (choice == "3")
             {
-               
+                user.LoadFiles(true);               
             }
             else if (choice == "4")
             {

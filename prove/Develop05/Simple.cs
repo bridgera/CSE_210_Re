@@ -8,5 +8,10 @@ public class SimplelGoal : BaseGoal
 
     }
 
+    public SimplelGoal (string goalType, bool isCompleted, string goalTitle, string description, int pointValue)
+    : base(goalType, isCompleted, goalTitle, description, pointValue)
+    {
+
+    }
     
 }
