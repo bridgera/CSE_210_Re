@@ -60,7 +60,7 @@ public class BaseGoal
         return "";
     }
 
-    public void DisplayGoal()
+    public virtual void DisplayGoal()
     {
         if (_isCompleted == true)
         {

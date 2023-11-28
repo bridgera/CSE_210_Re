@@ -12,10 +12,13 @@ public class ChecklistGoal : BaseGoal
 
     }
 
-    public ChecklistGoal (string goalType, bool isCompleted, string goalTitle, string description, int pointValue)
+    public ChecklistGoal (string goalType, bool isCompleted, string goalTitle, string description, int pointValue,
+    int timesCompleted, int timesNeeded, int bonusPoints)
     : base(goalType, isCompleted, goalTitle, description, pointValue)
     {
-
+        _timesCompleted = timesCompleted;
+        _timesNeeded = timesNeeded;
+        _bonusPoints = bonusPoints;
     }
 
 
@@ -47,7 +50,18 @@ public class ChecklistGoal : BaseGoal
         Console.Write("Bonus points for completion >");
         _bonusPoints = int.Parse(Console.ReadLine());
 
-        return $"{_timesNeeded}|{_bonusPoints}";
+        return $"{_timesCompleted}|{_timesNeeded}|{_bonusPoints}";
+    }
+
+    public override void DisplayGoal()
+    {
+        if (_isCompleted == true)
+        {
+            _checkIcon = "[x]";
+        }
+
+        Console.WriteLine($"{_checkIcon} {_goalTitle} ({_description}) [{_timesCompleted}/{_timesNeeded}]");
+        
     }
 
 

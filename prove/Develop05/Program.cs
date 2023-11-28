@@ -7,10 +7,10 @@ class Program
     {
         //Initializing
         Console.Clear();
-        Console.Write("Please enter user >>");
+        Console.Write("Please enter user >> ");
         string username = Console.ReadLine();
         User user = new User(username);
-        user.LoadFiles(false);
+        user.LoadFiles();
 
         string choice = "";
 
@@ -18,12 +18,11 @@ class Program
         while(choice != "4")
         {
             Console.Clear();
-            Console.WriteLine($"You have {user.GetPoints} points!");
+            Console.WriteLine($"You have {user.GetPoints()} points!");
             Console.WriteLine("\n 1. Create New Goal");
-            Console.WriteLine(" 2. Record Event");
-            Console.WriteLine(" 3. List Goals");
-            Console.WriteLine(" 4. Quit");
-            Console.Write(">>");
+            Console.WriteLine(" 2. Show Goals");
+            Console.WriteLine(" 3. Quit");
+            Console.Write(">> ");
 
             choice = Console.ReadLine();
 
@@ -61,13 +60,10 @@ class Program
             }
             else if (choice == "2")
             {
-                
+                Console.Clear();
+                user.ShowGoals();               
             }
             else if (choice == "3")
-            {
-                user.LoadFiles(true);               
-            }
-            else if (choice == "4")
             {
                 Console.Clear();
                 return;
