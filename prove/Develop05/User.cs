@@ -124,7 +124,6 @@ public class User
             
             foreach (BaseGoal goal in _goalObjList)
             {
-                Console.WriteLine($"Loaded goal: {goal.ToString()}");
                 Console.Write(currentGoalNum + ". ");
                 goal.DisplayGoal();
                 currentGoalNum = currentGoalNum + 1;
