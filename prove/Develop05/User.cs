@@ -22,6 +22,8 @@ public class User
 
     public void LoadFiles()
     {
+        _goalList.Clear();
+        _goalObjList.Clear();
         _directoryPath = $"SaveData/{_username}";
         _goalsPath = $"{_directoryPath}/Goals.txt";
         _pointPath = $"{_directoryPath}/Point.txt";
@@ -62,14 +64,16 @@ public class User
         
             if (goalType == "Simple")
             {
-                SimplelGoal simplelGoal = new SimplelGoal(goalType, isCompletedBool, goalTitle, description, pointValue);
-                _goalObjList.Add(simplelGoal);
+                SimpleGoal simpleGoal = new SimpleGoal(this, goalType, isCompletedBool, goalTitle, description, pointValue);
+                _goalObjList.Add(simpleGoal);
+                simpleGoal.CreateGoal(true);
             }
 
-            else if (goalType == "eternal")
+            else if (goalType == "Eternal")
             {
-                EternalGoal eternalGoal = new EternalGoal(goalType, isCompletedBool, goalTitle, description, pointValue);
+                EternalGoal eternalGoal = new EternalGoal(this, goalType, isCompletedBool, goalTitle, description, pointValue);
                 _goalObjList.Add(eternalGoal);
+                eternalGoal.CreateGoal(true);
             }
             else if (goalType == "Checklist")
 
@@ -78,10 +82,16 @@ public class User
                 int timesNeeded = int.Parse(attributes[6]);
                 int bonusPoints = int.Parse(attributes[7]);
 
-                ChecklistGoal checklistGoal = new ChecklistGoal(goalType, isCompletedBool, goalTitle, description, pointValue, timesCompleted, timesNeeded, bonusPoints);
+                ChecklistGoal checklistGoal = new ChecklistGoal(this, goalType, isCompletedBool, goalTitle, description, pointValue, timesCompleted, timesNeeded, bonusPoints);
                 _goalObjList.Add(checklistGoal);
+                checklistGoal.CreateCheckHeadless();
+
             }
-            Console.WriteLine($"Total goals loaded: {_goalObjList.Count}");
+
+
+            // Console.WriteLine($"Total goals to display: {_goalObjList.Count}");
+
+            // Console.ReadLine();
 
             
         }
@@ -90,26 +100,60 @@ public class User
 
     public void ShowGoals()
     {
-        int currentGoalNum = 1;
 
-        Console.WriteLine($"Total goals to display: {_goalObjList.Count}");
-        
-        foreach (BaseGoal goal in _goalObjList)
-        {
-             Console.WriteLine($"Loaded goal: {goal.ToString()}");
-            Console.Write(currentGoalNum + ". ");
-            goal.DisplayGoal();
-            currentGoalNum = currentGoalNum + 1;
-        }
-        Console.WriteLine("To mark off a goal type it's number (or quit by typing Q)");
-        string userInput = Console.ReadLine();
+        string userInput = "";
 
-        if (userInput != "Q")
+        int earnedPoints = 0;
+
+        while (userInput != "Q")
         {
-            int userInt = int.Parse(userInput);
-            _goalObjList[userInt].CompleteGoal();
+            Console.Clear();
+
+            if (earnedPoints > 0)
+            {
+                Console.WriteLine($"You Earned {earnedPoints} points!!");
+            }
+            
+            int currentGoalNum = 1;
+            
+            if (_goalObjList.Count == 0)
+            {
+                Console.WriteLine("You have made no goals.");
+            }
+            
+            
+            foreach (BaseGoal goal in _goalObjList)
+            {
+                Console.WriteLine($"Loaded goal: {goal.ToString()}");
+                Console.Write(currentGoalNum + ". ");
+                goal.DisplayGoal();
+                currentGoalNum = currentGoalNum + 1;
+                // Console.ReadLine();
+            }
+            Console.WriteLine("To mark off a goal type it's number (or quit by typing Q)");
+            userInput = Console.ReadLine().ToUpper();
+
+            if (userInput != "Q")
+            {
+                int userInt = int.Parse(userInput) -1;
+                _goalObjList[userInt].CompleteGoal();
+                earnedPoints = _goalObjList[userInt].GetPointValue();
+            }
         }
-        
+    }
+
+    public void Update(BaseGoal updatingGoal)
+    {
+        for (int i = 0; i < _goalObjList.Count; i++)
+        {
+            if (_goalObjList[i] == updatingGoal)
+            {
+                string goalString = _goalObjList[i].UpdateString();
+                _goalList[i] = goalString; 
+                break; 
+            }
+        }
+        this.SaveToFile();
     }
 
 
@@ -139,7 +183,7 @@ public class User
 
     public void AddPoints(int pointAmount)
     {
-        _points =+ pointAmount;
+        _points = _points + pointAmount;
         File.WriteAllText(_pointPath, "");
         File.WriteAllText(_pointPath, _points.ToString());
     }

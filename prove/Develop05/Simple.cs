@@ -1,15 +1,15 @@
 using System;
 
-public class SimplelGoal : BaseGoal
+public class SimpleGoal : BaseGoal
 {
-    public SimplelGoal(User user) : base(user)
+    public SimpleGoal(User user) : base(user)
     {
         _goalType = "Simple";
 
     }
 
-    public SimplelGoal (string goalType, bool isCompleted, string goalTitle, string description, int pointValue)
-    : base(goalType, isCompleted, goalTitle, description, pointValue)
+    public SimpleGoal (User user, string goalType, bool isCompleted, string goalTitle, string description, int pointValue)
+    : base(user, goalType, isCompleted, goalTitle, description, pointValue)
     {
 
     }

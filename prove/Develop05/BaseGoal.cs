@@ -10,20 +10,24 @@ public class BaseGoal
     protected bool _isCompleted;
     protected string _checkIcon = "[ ]";
 
-    //New goal constructor
     public BaseGoal (User user)
     {
         _user = user;
     }
 
-    //Loading goal constructor
-    public BaseGoal (string goalType, bool isCompleted, string goalTitle, string description, int pointValue)
+    public BaseGoal (User user, string goalType, bool isCompleted, string goalTitle, string description, int pointValue)
     {
+        _user = user;
         _goalType = goalType;
         _isCompleted = isCompleted;
         _goalTitle = goalTitle;
         _description = description;
         _pointValue = pointValue;
+    }
+
+    public virtual int GetPointValue()
+    {
+        return _pointValue;
     }
 
 
@@ -32,19 +36,25 @@ public class BaseGoal
         _user.AddPoints(_pointValue);
         Console.WriteLine($"You earned {_pointValue} points!");
         _isCompleted = true;
+
+        _user.Update(this);
     }
 
-    public void CreateGoal()
+    public void CreateGoal(bool headless = false)
     {
-        Console.Write("Goal Title >");
-        _goalTitle = Console.ReadLine();
+        if (headless != true)
+        {
+            Console.Clear();
+            Console.Write("Goal Title >");
+            _goalTitle = Console.ReadLine();
 
-        Console.Write("Points per completion >");
-        _pointValue = int.Parse(Console.ReadLine());
+            Console.Write("Points per completion >");
+            _pointValue = int.Parse(Console.ReadLine());
 
-        Console.Write("Description >");
-        _description = Console.ReadLine();
-
+            Console.Write("Description >");
+            _description = Console.ReadLine();
+        }
+        
         string specificParam = AddGoalSpecificParameters();
 
         string classString = $"{_goalType}|{_isCompleted}|{_goalTitle}|{_description}|{_pointValue}|{specificParam}";
@@ -71,6 +81,10 @@ public class BaseGoal
         
     }
 
-
-    
+    public virtual string UpdateString()
+    {
+        string classString = $"{_goalType}|{_isCompleted}|{_goalTitle}|{_description}|{_pointValue}";
+        return classString;
+    }
+  
 }

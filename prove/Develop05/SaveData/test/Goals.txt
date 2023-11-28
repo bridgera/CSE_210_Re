@@ -1,1 +1,4 @@
-Eternal|False|testet|vfghfg|34|
+Simple|True|Test|sdfsdf|23|
+Checklist|True|tetstt|sdfd|34|36|34|23
+Checklist|True|sdf|sdf|2|4|2|23
+Eternal|False|sdf|sdf|23|

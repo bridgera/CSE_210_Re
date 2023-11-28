@@ -39,7 +39,7 @@ class Program
 
                 if (choice == "1")
                 {
-                    SimplelGoal simplelGoal = new SimplelGoal(user);
+                    SimpleGoal simplelGoal = new SimpleGoal(user);
                     simplelGoal.CreateGoal();
                 }
 
@@ -61,6 +61,7 @@ class Program
             else if (choice == "2")
             {
                 Console.Clear();
+                user.LoadFiles();
                 user.ShowGoals();               
             }
             else if (choice == "3")

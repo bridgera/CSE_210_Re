@@ -5,10 +5,11 @@ public class EternalGoal : BaseGoal
     public EternalGoal(User user) : base(user)
     {
         _goalType = "Eternal";
+        _checkIcon = "[∞]";
 
     }
-    public EternalGoal (string goalType, bool isCompleted, string goalTitle, string description, int pointValue)
-    : base(goalType, isCompleted, goalTitle, description, pointValue)
+    public EternalGoal (User user, string goalType, bool isCompleted, string goalTitle, string description, int pointValue)
+    : base(user, goalType, isCompleted, goalTitle, description, pointValue)
     {
 
     }
@@ -17,6 +18,12 @@ public class EternalGoal : BaseGoal
     {
         _user.AddPoints(_pointValue);
         Console.WriteLine($"You earned {_pointValue} points!");
+    }
+
+    public override void DisplayGoal()
+    {
+        _checkIcon = "[∞]";
+        Console.WriteLine($"{_checkIcon} {_goalTitle} ({_description})");
     }
 
     
